@@ -2,13 +2,14 @@
 	"name": "smtp-client",
 	"version": "0.0.1",
 	"scripts": {
-		"pretest": "node build.js",
+		"pretest": "node build.js && cp smtp-client-browserified.js test/",
 		"test": "grunt test"
 	},
 	"dependencies": {
 		"net-chromeify": "https://github.com/whiteout-io/net-chromeify/tarball/rewrite",
 		"tls-chromeify": "https://github.com/whiteout-io/tls-chromeify/tarball/master",
-		"nodemailer": "~0.5.2"
+		"nodemailer": "~0.5.2",
+		"simplesmtp": "~0.3.6"
 	},
 	"devDependencies": {
 		"browserify": "~2.26.0",

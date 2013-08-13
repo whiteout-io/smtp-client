@@ -34,3 +34,26 @@ smtpTransport.sendMail(mailOptions, function(error, response) {
     // if you don't want to use this transport object anymore, uncomment following line
     smtpTransport.close(); // shut down the connection pool, no more messages
 });
+
+
+// var simplesmtp = require('simplesmtp');
+// var smtpClient = simplesmtp.connect(465, 'smtp.gmail.com', {
+//     secureConnection: true,
+//     auth: {
+//         user: "safewithme.testuser@gmail.com",
+//         pass: "hellosafe"
+//     }
+// });
+
+// smtpClient.once("idle", function() {
+//     console.log('idle');
+//     smtpClient.close();
+// });
+
+// smtpClient.on("error", function(err) {
+//     console.log('error', err);
+// });
+
+// smtpClient.on("end", function() {
+//     console.log('end');
+// });

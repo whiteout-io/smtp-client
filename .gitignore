@@ -1,2 +1,5 @@
 .DS_Store
 node_modules
+
+smtp-client-browserified.js
+test/smtp-client-browserified.js
