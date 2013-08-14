@@ -1,39 +1,69 @@
 'use strict';
 
-var sc = module.exports,
-    nodemailer = require('nodemailer');
+var nodemailer = require('nodemailer'),
+    SmtpClient;
 
-sc.SmtpClient = function() {};
+/**
+ * SMTP client constructor for the high level smpt api. Creates an SMTP transport object internally
+ * @param {String} options.service The name of the email service to user e.g. 'Gmail'
+ * @param {String} options.host.auth.user Username for login
+ * @param {String} options.host.auth.pass Password for login
+ */
+SmtpClient = function(options) {
+    var self = this;
 
-sc.SmtpClient.prototype.send = function() {};
-
-var smtpTransport = nodemailer.createTransport("SMTP", {
-    service: "Gmail",
-    auth: {
-        user: "safewithme.testuser@gmail.com",
-        pass: "hellosafe"
-    }
-});
-
-var mailOptions = {
-    from: "Fred Foo ✔ <safewithme.testuser@gmail.com>", // sender address
-    to: "safewithme.testuser@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world ✔", // plaintext body
-    html: "<b>Hello world ✔</b>" // html body
+    self._smtpTransport = nodemailer.createTransport("SMTP", {
+        service: options.service,
+        auth: options.auth
+    });
 };
 
-// send mail with defined transport object
-smtpTransport.sendMail(mailOptions, function(error, response) {
-    if (error) {
-        console.log(error);
-    } else {
-        console.log("Message sent: " + response.message);
-    }
+/**
+ * Send en email using the smtp transport object
+ * @param {Object} email An Email object formatted in the email model format
+ */
+SmtpClient.prototype.send = function(email, callback) {
+    var self = this,
+        mailOptions;
 
-    // if you don't want to use this transport object anymore, uncomment following line
-    smtpTransport.close(); // shut down the connection pool, no more messages
-});
+    mailOptions = {
+        from: email.from[0].name + ' <' + email.from[0].address + '>', // sender address
+        to: '', // list of receivers
+        subject: email.subject, // Subject line
+        text: email.body, // plaintext body
+        html: undefined // currently only text email bodies are supported
+    };
+
+    // add recipient to 'to' and seperate addresses with commas
+    email.to.forEach(function(recipient) {
+        if (mailOptions.to.length === 0) {
+            mailOptions.to += recipient.address;
+        } else {
+            mailOptions.to += ', ' + recipient.address;
+        }
+    });
+
+    self._smtpTransport.sendMail(mailOptions, callback);
+};
+
+/**
+ * Closes the smtp transport object
+ */
+SmtpClient.prototype.close = function() {
+    var self = this;
+
+    self._smtpTransport.close(); // shut down the connection pool, no more messages
+};
+
+// export node module
+module.exports.SmtpClient = SmtpClient;
+// export module into global scope for use in a require.js shim
+if (typeof window !== 'undefined') {
+    window.SmtpClient = SmtpClient;
+}
+
+
+/* test code */
 
 
 // var simplesmtp = require('simplesmtp');
