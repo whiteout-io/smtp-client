@@ -10,14 +10,6 @@ if (typeof window === 'undefined') {
     expect = window.chai.expect;
 }
 
-loginOptions = {
-    service: "Gmail",
-    auth: {
-        user: "safewithme.testuser@gmail.com",
-        pass: "hellosafe"
-    }
-};
-
 dummyMail = {
     from: [{
         name: 'Fred Foo',
@@ -35,16 +27,44 @@ describe('SmtpClient integration tests', function() {
 
     var sc;
 
-    beforeEach(function() {
-        sc = new SmtpClient(loginOptions);
-    });
-
     afterEach(function() {
         sc.close();
     });
 
-    describe('SmtpClient.send', function() {
+    describe('SmtpClient.send without TLS', function() {
         it('should send an email', function(done) {
+            loginOptions = {
+                secureConnection: false, // use SSL
+                port: 25,
+                server: 'smtpmail.t-online.de',
+                auth: {
+                    user: "whiteout.test@t-online.de",
+                    pass: "@6IyFg1SIlWH91Co"
+                }
+            };
+
+            sc = new SmtpClient(loginOptions);
+            sc.send(dummyMail, function(error, response) {
+                expect(error).to.not.exist;
+                expect(response.message).to.exist;
+                done();
+            });
+        });
+    });
+
+    describe('SmtpClient.send with TLS', function() {
+        it('should send an email', function(done) {
+            loginOptions = {
+                secureConnection: true, // use SSL
+                port: 465,
+                server: 'smtp.gmail.com',
+                auth: {
+                    user: "safewithme.testuser@gmail.com",
+                    pass: "hellosafe"
+                }
+            };
+
+            sc = new SmtpClient(loginOptions);
             sc.send(dummyMail, function(error, response) {
                 expect(error).to.not.exist;
                 expect(response.message).to.exist;

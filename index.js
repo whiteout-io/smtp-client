@@ -12,8 +12,10 @@ var nodemailer = require('nodemailer'),
 SmtpClient = function(options) {
     var self = this;
 
-    self._smtpTransport = nodemailer.createTransport("SMTP", {
-        service: options.service,
+    self._smtpTransport = nodemailer.createTransport('SMTP', {
+        secureConnection: options.secureConnection, // use SSL
+        port: options.port,
+        host: options.server,
         auth: options.auth
     });
 };
@@ -61,29 +63,3 @@ module.exports.SmtpClient = SmtpClient;
 if (typeof window !== 'undefined') {
     window.SmtpClient = SmtpClient;
 }
-
-
-/* test code */
-
-
-// var simplesmtp = require('simplesmtp');
-// var smtpClient = simplesmtp.connect(465, 'smtp.gmail.com', {
-//     secureConnection: true,
-//     auth: {
-//         user: "safewithme.testuser@gmail.com",
-//         pass: "hellosafe"
-//     }
-// });
-
-// smtpClient.once("idle", function() {
-//     console.log('idle');
-//     smtpClient.close();
-// });
-
-// smtpClient.on("error", function(err) {
-//     console.log('error', err);
-// });
-
-// smtpClient.on("end", function() {
-//     console.log('end');
-// });
