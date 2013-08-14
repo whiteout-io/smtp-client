@@ -25,11 +25,23 @@ b.require('tls-chromeify', {
 });
 
 b.bundle(function(err, src) {
+    var dirName,
+        fileName,
+        file;
+
     if (err) {
         throw err;
     }
 
-    var file = path.join(__dirname + '/smtp-client-browserified.js');
+    dirName = 'src-gen';
+    fileName = 'smtp-client-browserified.js';
+
+    // create dir if not existant
+    try {
+        fs.mkdirSync(path.join(__dirname, dirName));
+    } catch (e) {}
+
+    file = path.join(__dirname, dirName, fileName);
     fs.writeFileSync(file, src);
 
     console.log('bundle written to: ' + file);
