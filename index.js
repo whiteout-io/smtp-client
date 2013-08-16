@@ -5,22 +5,24 @@ var nodemailer = require('nodemailer'),
 
 /**
  * SMTP client constructor for the high level smpt api. Creates an SMTP transport object internally
- * @param {String} options.service The name of the email service to user e.g. 'Gmail'
- * @param {String} options.host.auth.user Username for login
- * @param {String} options.host.auth.pass Password for login
+ * @param {Number} options.port Port is the port to the server (defaults to 25 on non-secure and to 465 on secure connection).
+ * @param {String} options.host Hostname of the server.
+ * @param {Boolean} options.secure Indicates if the connection is using TLS or not
+ * @param {String} options.auth.user Username for login
+ * @param {String} options.auth.pass Password for login
  */
 SmtpClient = function(options) {
     var self = this;
 
     //validate options
-    if (typeof options.secureConnection === 'undefined' || !options.port || !options.server || !options.auth) {
+    if (typeof options.secure === 'undefined' || !options.port || !options.host || !options.auth) {
         throw new Error('Not all options have been specified!');
     }
 
     self._smtpTransport = nodemailer.createTransport('SMTP', {
-        secureConnection: options.secureConnection, // use SSL
+        secureConnection: options.secure, // use SSL
         port: options.port,
-        host: options.server,
+        host: options.host,
         auth: options.auth
     });
 };

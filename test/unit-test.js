@@ -44,9 +44,9 @@ smtpClient.__set__({
 //
 
 loginOptions = {
-    secureConnection: false, // use SSL
+    secure: false, // use SSL
     port: 25,
-    server: 'smtpmail.t-online.de',
+    host: 'smtpmail.t-online.de',
     auth: {
         user: "whiteout.test@t-online.de",
         pass: "@6IyFg1SIlWH91Co"

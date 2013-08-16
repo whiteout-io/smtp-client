@@ -34,9 +34,9 @@ describe('SmtpClient integration tests', function() {
     describe('SmtpClient.send without TLS', function() {
         it('should send an email', function(done) {
             loginOptions = {
-                secureConnection: false, // use SSL
+                secure: false, // use SSL
                 port: 25,
-                server: 'smtpmail.t-online.de',
+                host: 'smtpmail.t-online.de',
                 auth: {
                     user: "whiteout.test@t-online.de",
                     pass: "@6IyFg1SIlWH91Co"
@@ -56,9 +56,9 @@ describe('SmtpClient integration tests', function() {
     describe('SmtpClient.send with TLS', function() {
         it('should send an email', function(done) {
             loginOptions = {
-                secureConnection: true, // use SSL
+                secure: true, // use SSL
                 port: 465,
-                server: 'smtp.gmail.com',
+                host: 'smtp.gmail.com',
                 auth: {
                     user: "safewithme.testuser@gmail.com",
                     pass: "hellosafe"
