@@ -63,9 +63,19 @@ SmtpClient.prototype.close = function() {
     self._smtpTransport.close(); // shut down the connection pool, no more messages
 };
 
-// export node module
-module.exports.SmtpClient = SmtpClient;
-// export module into global scope for use in a require.js shim
-if (typeof window !== 'undefined') {
+/**
+ * Export module
+ */
+if (typeof define !== 'undefined' && define.amd) {
+    // AMD
+    define(['forge'], function(forge) {
+        window.forge = forge;
+        return SmtpClient;
+    });
+} else if (typeof window !== 'undefined') {
+    // export module into global scope
     window.SmtpClient = SmtpClient;
+} else if (typeof module !== 'undefined' && module.exports) {
+    // node.js
+    module.exports.SmtpClient = SmtpClient;
 }
