@@ -8,7 +8,6 @@
 	"dependencies": {
 		"net-chromeify": "https://github.com/whiteout-io/net-chromeify/tarball/rewrite",
 		"tls-chromeify": "https://github.com/whiteout-io/tls-chromeify/tarball/master",
-		"simplesmtp": "https://github.com/whiteout-io/simplesmtp/tarball/browserify",
 		"nodemailer": "~0.5.2"
 	},
 	"devDependencies": {

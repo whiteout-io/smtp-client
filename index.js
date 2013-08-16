@@ -12,6 +12,11 @@ var nodemailer = require('nodemailer'),
 SmtpClient = function(options) {
     var self = this;
 
+    //validate options
+    if (typeof options.secureConnection === 'undefined' || !options.port || !options.server || !options.auth) {
+        throw new Error('Not all options have been specified!');
+    }
+
     self._smtpTransport = nodemailer.createTransport('SMTP', {
         secureConnection: options.secureConnection, // use SSL
         port: options.port,
@@ -23,6 +28,7 @@ SmtpClient = function(options) {
 /**
  * Send en email using the smtp transport object
  * @param {Object} email An Email object formatted in the email model format
+ * @param {function(error, response)} callback invoked after sending is complete
  */
 SmtpClient.prototype.send = function(email, callback) {
     var self = this,

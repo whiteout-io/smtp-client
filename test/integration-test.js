@@ -47,6 +47,7 @@ describe('SmtpClient integration tests', function() {
             sc.send(dummyMail, function(error, response) {
                 expect(error).to.not.exist;
                 expect(response.message).to.exist;
+                expect(response.messageId).to.exist;
                 done();
             });
         });
@@ -68,6 +69,7 @@ describe('SmtpClient integration tests', function() {
             sc.send(dummyMail, function(error, response) {
                 expect(error).to.not.exist;
                 expect(response.message).to.exist;
+                expect(response.messageId).to.exist;
                 done();
             });
         });
