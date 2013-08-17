@@ -31,7 +31,7 @@ describe('SmtpClient integration tests', function() {
         sc.close();
     });
 
-    describe('SmtpClient.send without TLS', function() {
+    describe('SmtpClient.send with T-mobile without TLS', function() {
         it('should send an email', function(done) {
             loginOptions = {
                 secure: false, // use SSL

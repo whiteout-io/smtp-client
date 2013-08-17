@@ -15,7 +15,7 @@ SmtpClient = function(options) {
     var self = this;
 
     //validate options
-    if (typeof options.secure === 'undefined' || !options.port || !options.host || !options.auth) {
+    if (typeof options.secure === 'undefined' || !options.port || !options.host) {
         throw new Error('Not all options have been specified!');
     }
 
