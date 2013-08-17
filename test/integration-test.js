@@ -12,8 +12,8 @@ if (typeof window === 'undefined') {
 
 dummyMail = {
     from: [{
-        name: 'Fred Foo',
-        address: 'safewithme.testuser@gmail.com'
+        name: 'Whiteout Test',
+        address: 'whiteout.test@t-online.de'
     }], // sender address
     to: [{
         address: 'safewithme.testuser@gmail.com'
@@ -39,7 +39,7 @@ describe('SmtpClient integration tests', function() {
                 host: 'smtpmail.t-online.de',
                 auth: {
                     user: "whiteout.test@t-online.de",
-                    pass: "@6IyFg1SIlWH91Co"
+                    pass: "@6IyFg1SIlWH91Co" // 'R2nUXJlh9JKV3ZEp1#jH'
                 }
             };
 
