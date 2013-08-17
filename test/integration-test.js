@@ -53,7 +53,7 @@ describe('SmtpClient integration tests', function() {
     //     });
     // });
 
-    describe('SmtpClient.send with TLS', function() {
+    describe('SmtpClient.send with T-mobile over TLS', function() {
         it('should send an email', function(done) {
             loginOptions = {
                 secure: true, // use SSL
@@ -62,6 +62,28 @@ describe('SmtpClient integration tests', function() {
                 auth: {
                     user: "whiteout.test@t-online.de",
                     pass: "@6IyFg1SIlWH91Co"
+                }
+            };
+
+            sc = new SmtpClient(loginOptions);
+            sc.send(dummyMail, function(error, response) {
+                expect(error).to.not.exist;
+                expect(response.message).to.exist;
+                expect(response.messageId).to.exist;
+                done();
+            });
+        });
+    });
+
+    describe('SmtpClient.send with Gmail over TLS', function() {
+        it('should send an email', function(done) {
+            loginOptions = {
+                secure: true, // use SSL
+                port: 465,
+                host: 'smtp.gmail.com',
+                auth: {
+                    user: "safewithme.testuser@gmail.com",
+                    pass: "hellosafe"
                 }
             };
 
