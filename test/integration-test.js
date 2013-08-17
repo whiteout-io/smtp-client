@@ -31,37 +31,15 @@ describe('SmtpClient integration tests', function() {
         sc.close();
     });
 
-    // describe('SmtpClient.send without TLS', function() {
-    //     it('should send an email', function(done) {
-    //         loginOptions = {
-    //             secure: false, // use SSL
-    //             port: 25,
-    //             host: 'smtpmail.t-online.de',
-    //             auth: {
-    //                 user: "whiteout.test@t-online.de",
-    //                 pass: "@6IyFg1SIlWH91Co" // 'R2nUXJlh9JKV3ZEp1#jH'
-    //             }
-    //         };
-
-    //         sc = new SmtpClient(loginOptions);
-    //         sc.send(dummyMail, function(error, response) {
-    //             expect(error).to.not.exist;
-    //             expect(response.message).to.exist;
-    //             expect(response.messageId).to.exist;
-    //             done();
-    //         });
-    //     });
-    // });
-
-    describe('SmtpClient.send with T-mobile over TLS', function() {
+    describe('SmtpClient.send without TLS', function() {
         it('should send an email', function(done) {
             loginOptions = {
-                secure: true, // use SSL
-                port: 465,
-                host: 'securesmtp.t-online.de',
+                secure: false, // use SSL
+                port: 25,
+                host: 'smtpmail.t-online.de',
                 auth: {
                     user: "whiteout.test@t-online.de",
-                    pass: "@6IyFg1SIlWH91Co"
+                    pass: "@6IyFg1SIlWH91Co" // 'R2nUXJlh9JKV3ZEp1#jH'
                 }
             };
 
@@ -74,6 +52,30 @@ describe('SmtpClient integration tests', function() {
             });
         });
     });
+
+    /* The following is the only one that works on travis CI */
+
+    // describe('SmtpClient.send with T-mobile over TLS', function() {
+    //     it('should send an email', function(done) {
+    //         loginOptions = {
+    //             secure: true, // use SSL
+    //             port: 465,
+    //             host: 'securesmtp.t-online.de',
+    //             auth: {
+    //                 user: "whiteout.test@t-online.de",
+    //                 pass: "@6IyFg1SIlWH91Co"
+    //             }
+    //         };
+
+    //         sc = new SmtpClient(loginOptions);
+    //         sc.send(dummyMail, function(error, response) {
+    //             expect(error).to.not.exist;
+    //             expect(response.message).to.exist;
+    //             expect(response.messageId).to.exist;
+    //             done();
+    //         });
+    //     });
+    // });
 
     describe('SmtpClient.send with Gmail over TLS', function() {
         it('should send an email', function(done) {
