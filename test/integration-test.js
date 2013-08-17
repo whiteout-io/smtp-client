@@ -58,10 +58,10 @@ describe('SmtpClient integration tests', function() {
             loginOptions = {
                 secure: true, // use SSL
                 port: 465,
-                host: 'smtp.gmail.com',
+                host: 'securesmtp.t-online.de',
                 auth: {
-                    user: "safewithme.testuser@gmail.com",
-                    pass: "hellosafe"
+                    user: "whiteout.test@t-online.de",
+                    pass: "@6IyFg1SIlWH91Co"
                 }
             };
 
