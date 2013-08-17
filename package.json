@@ -9,10 +9,11 @@
 		"net-chromeify": "https://github.com/whiteout-io/net-chromeify/tarball/rewrite",
 		"tls-chromeify": "https://github.com/whiteout-io/tls-chromeify/tarball/master",
 		"simplesmtp": "0.3.7",
-		"nodemailer": "0.5.2"
+		"nodemailer": "0.5.2",
+		"browserify": "2.26.0",
+		"mailparser": "0.3.6"
 	},
 	"devDependencies": {
-		"browserify": "~2.26.0",
 		"mocha": "~1.12.0",
 		"chai": "~1.7.2",
 		"grunt": "~0.4.1",
@@ -20,7 +21,6 @@
 		"grunt-mocha-test": "~0.6.2",
 		"rewire": "~1.1.3",
 		"jsmockito": "~1.0.4",
-		"jshamcrest": "~0.6.7",
-		"mailparser": "~0.3.6"
+		"jshamcrest": "~0.6.7"
 	}
 }
