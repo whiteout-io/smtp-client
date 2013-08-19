@@ -13,7 +13,7 @@ if (typeof window === 'undefined') {
 dummyMail = {
     from: [{
         name: 'Whiteout Test',
-        address: 'safewithme.testuser@gmail.com'
+        address: 'whiteout.test@t-online.de'
     }], // sender address
     to: [{
         address: 'safewithme.testuser@gmail.com'
@@ -53,8 +53,6 @@ describe('SmtpClient integration tests', function() {
         });
     });
 
-    /* The following is the only one that works on travis CI */
-
     // describe('SmtpClient.send with T-mobile over TLS', function() {
     //     it('should send an email', function(done) {
     //         loginOptions = {
@@ -77,25 +75,25 @@ describe('SmtpClient integration tests', function() {
     //     });
     // });
 
-    describe('SmtpClient.send with Gmail over TLS', function() {
-        it('should send an email', function(done) {
-            loginOptions = {
-                secure: true, // use SSL
-                port: 465,
-                host: 'smtp.gmail.com',
-                auth: {
-                    user: "safewithme.testuser@gmail.com",
-                    pass: "hellosafe"
-                }
-            };
+    // describe('SmtpClient.send with Gmail over TLS', function() {
+    //     it('should send an email', function(done) {
+    //         loginOptions = {
+    //             secure: true, // use SSL
+    //             port: 465,
+    //             host: 'smtp.gmail.com',
+    //             auth: {
+    //                 user: "safewithme.testuser@gmail.com",
+    //                 pass: "hellosafe"
+    //             }
+    //         };
 
-            sc = new SmtpClient(loginOptions);
-            sc.send(dummyMail, function(error, response) {
-                expect(error).to.not.exist;
-                expect(response.message).to.exist;
-                expect(response.messageId).to.exist;
-                done();
-            });
-        });
-    });
+    //         sc = new SmtpClient(loginOptions);
+    //         sc.send(dummyMail, function(error, response) {
+    //             expect(error).to.not.exist;
+    //             expect(response.message).to.exist;
+    //             expect(response.messageId).to.exist;
+    //             done();
+    //         });
+    //     });
+    // });
 });
