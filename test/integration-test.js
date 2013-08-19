@@ -13,7 +13,7 @@ if (typeof window === 'undefined') {
 dummyMail = {
     from: [{
         name: 'Whiteout Test',
-        address: 'whiteout.test@t-online.de'
+        address: 'safewithme.testuser@gmail.com'
     }], // sender address
     to: [{
         address: 'safewithme.testuser@gmail.com'
