@@ -10,6 +10,18 @@ if (typeof window === 'undefined') {
     expect = window.chai.expect;
 }
 
+dummyMail = {
+    from: [{
+        name: 'Whiteout Test',
+        address: 'whiteout.test@t-online.de'
+    }], // sender address
+    to: [{
+        address: 'safewithme.testuser@gmail.com'
+    }], // list of receivers
+    subject: "Hello", // Subject line
+    body: "Hello world" // plaintext body
+};
+
 describe('SmtpClient integration tests', function() {
     this.timeout(20000);
 
@@ -21,18 +33,6 @@ describe('SmtpClient integration tests', function() {
 
     describe('SmtpClient.send with T-mobile without TLS', function() {
         it('should send an email', function(done) {
-            dummyMail = {
-                from: [{
-                    name: 'Whiteout Test',
-                    address: 'whiteout.test@t-online.de'
-                }], // sender address
-                to: [{
-                    address: 'safewithme.testuser@gmail.com'
-                }], // list of receivers
-                subject: "Hello", // Subject line
-                body: "Hello world" // plaintext body
-            };
-
             loginOptions = {
                 secure: false, // use SSL
                 port: 25,
@@ -75,23 +75,11 @@ describe('SmtpClient integration tests', function() {
     //     });
     // });
 
-    describe('SmtpClient.send with Gmail without TLS', function() {
+    describe('SmtpClient.send with Gmail over TLS', function() {
         it('should send an email', function(done) {
-            dummyMail = {
-                from: [{
-                    name: 'Whiteout Test',
-                    address: 'safewithme.testuser@gmail.com'
-                }], // sender address
-                to: [{
-                    address: 'safewithme.testuser@gmail.com'
-                }], // list of receivers
-                subject: "Hello", // Subject line
-                body: "Hello world" // plaintext body
-            };
-
             loginOptions = {
-                secure: false, // use SSL
-                port: 25,
+                secure: true, // use SSL
+                port: 465,
                 host: 'smtp.gmail.com',
                 auth: {
                     user: "safewithme.testuser@gmail.com",
