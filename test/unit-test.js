@@ -24,6 +24,9 @@ smtpTransportMock = {
             return;
         }
 
+        expect(arr2str(mailOptions.attachments[0].contents)).to.equal('foofoofoofoofoo');
+        expect(arr2str(mailOptions.attachments[1].contents)).to.equal('barbarbarbarbar');
+
         callback(null, {
             message: "250 2.0.0 Message accepted.",
             messageId: "1376645980390.0de95471@Nodemailer"
@@ -38,6 +41,19 @@ when(nodemailerMock).createTransport('SMTP', anything()).thenReturn(smtpTranspor
 smtpClient.__set__({
     nodemailer: nodemailerMock
 });
+
+function str2arr(str) {
+    var buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
+    var bufView = new Uint16Array(buf);
+    for (var i = 0, strLen = str.length; i < strLen; i++) {
+        bufView[i] = str.charCodeAt(i);
+    }
+    return bufView;
+}
+
+function arr2str(arr) {
+    return String.fromCharCode.apply(null, arr);
+}
 
 //
 // Test data
@@ -62,7 +78,16 @@ dummyMail = {
         address: 'safewithme.testuser@gmail.com'
     }], // list of receivers
     subject: "Hello", // Subject line
-    body: "Hello world" // plaintext body
+    body: "Hello world", // plaintext body
+    attachments: [{
+        fileName: 'foo.txt',
+        contentType: 'text/plain',
+        uint8Array: str2arr('foofoofoofoofoo')
+    }, {
+        fileName: 'bar.txt',
+        contentType: 'text/plain',
+        uint8Array: str2arr('barbarbarbarbar')
+    }]
 };
 
 //

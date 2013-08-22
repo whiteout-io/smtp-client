@@ -11,6 +11,15 @@ if (typeof window === 'undefined') {
     expect = window.chai.expect;
 }
 
+function str2arr(str) {
+    var buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
+    var bufView = new Uint16Array(buf);
+    for (var i = 0, strLen = str.length; i < strLen; i++) {
+        bufView[i] = str.charCodeAt(i);
+    }
+    return bufView;
+}
+
 dummyMail = {
     from: [{
         name: 'Whiteout Test',
@@ -20,7 +29,16 @@ dummyMail = {
         address: 'safewithme.testuser@gmail.com'
     }], // list of receivers
     subject: "Hello", // Subject line
-    body: "Hello world" // plaintext body
+    body: "Hello world", // plaintext body
+    attachments: [{
+        fileName: 'foo.txt',
+        contentType: 'text/plain',
+        uint8Array: str2arr('foofoofoofoofoo')
+    }, {
+        fileName: 'bar.txt',
+        contentType: 'text/plain',
+        uint8Array: str2arr('barbarbarbarbar')
+    }]
 };
 
 describe('SmtpClient local integration tests', function() {

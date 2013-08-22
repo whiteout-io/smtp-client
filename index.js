@@ -29,7 +29,11 @@ SmtpClient = function(options) {
 
 /**
  * Send en email using the smtp transport object
- * @param {Object} email An Email object formatted in the email model format
+ * @param {Array} email.from Array of sender objects containing name and address
+ * @param {Array} email.to Array of receiver objects containing name and address
+ * @param {String} email.subject The email subject
+ * @param {String} email.body The email body
+ * @param {Array} email.attachments Array of attachment objects with fileName as String, uint8Array as Uint8Array, and contentType as String
  * @param {function(error, response)} callback invoked after sending is complete
  */
 SmtpClient.prototype.send = function(email, callback) {
@@ -41,7 +45,8 @@ SmtpClient.prototype.send = function(email, callback) {
         to: '', // list of receivers
         subject: email.subject, // Subject line
         text: email.body, // plaintext body
-        html: undefined // currently only text email bodies are supported
+        html: undefined, // currently only text email bodies are supported
+        attachments: []
     };
 
     // add recipient to 'to' and seperate addresses with commas
@@ -52,6 +57,18 @@ SmtpClient.prototype.send = function(email, callback) {
             mailOptions.to += ', ' + recipient.address;
         }
     });
+
+    // convert the Uint8Array to a Buffer
+    if (typeof email.attachments !== 'undefined') {
+        email.attachments.forEach(function(attachment) {
+            mailOptions.attachments.push({
+                fileName: attachment.fileName,
+                contents: new Buffer(new Uint8Array(attachment.uint8Array)),
+                contentType: attachment.contentType
+            });
+        });
+    }
+
 
     self._smtpTransport.sendMail(mailOptions, callback);
 };
