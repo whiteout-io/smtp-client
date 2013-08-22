@@ -52,7 +52,7 @@ function str2arr(str) {
 }
 
 function arr2str(arr) {
-    return String.fromCharCode.apply(null, new Uint16Array(arr));
+    return String.fromCharCode.apply(null, arr);
 }
 
 //
