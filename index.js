@@ -46,7 +46,6 @@ SmtpClient.prototype.send = function(email, callback) {
         subject: email.subject, // Subject line
         text: email.body, // plaintext body
         html: undefined, // currently only text email bodies are supported
-        attachments: []
     };
 
     // add recipient to 'to' and seperate addresses with commas
@@ -60,10 +59,11 @@ SmtpClient.prototype.send = function(email, callback) {
 
     // convert the Uint8Array to a Buffer
     if (typeof email.attachments !== 'undefined') {
+        mailOptions.attachments = [];
         email.attachments.forEach(function(attachment) {
             mailOptions.attachments.push({
+                contents: new Buffer(attachment.uint8Array),
                 fileName: attachment.fileName,
-                contents: new Buffer(new Uint8Array(attachment.uint8Array)),
                 contentType: attachment.contentType
             });
         });
