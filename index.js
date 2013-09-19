@@ -87,7 +87,7 @@ SmtpClient.prototype.close = function() {
  */
 if (typeof define !== 'undefined' && define.amd) {
     // AMD
-    define(['forge'], function(forge) {
+    define(['node-forge'], function(forge) {
         window.forge = forge;
         return SmtpClient;
     });
