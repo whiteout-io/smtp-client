@@ -44,8 +44,7 @@ SmtpClient.prototype.send = function(email, callback) {
         from: email.from[0].name + ' <' + email.from[0].address + '>', // sender address
         to: '', // list of receivers
         subject: email.subject, // Subject line
-        text: email.body, // plaintext body
-        html: email.body // currently only text email bodies are supported
+        text: email.body // plaintext body
     };
 
     // add recipient to 'to' and seperate addresses with commas
