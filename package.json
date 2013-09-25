@@ -1,26 +1,27 @@
 {
 	"name": "smtp-client",
 	"version": "0.0.1",
+	"main": "src/smtp-client.js",
 	"scripts": {
-		"pretest": "node build.js && cp src-gen/smtp-client-browserified.js test/",
 		"test": "grunt test"
 	},
 	"dependencies": {
-		"net-chromeify": "https://github.com/whiteout-io/net-chromeify/tarball/rewrite",
-		"tls-chromeify": "https://github.com/whiteout-io/tls-chromeify/tarball/master",
-		"simplesmtp": "0.3.7",
-		"nodemailer": "0.5.2",
-		"browserify": "2.26.0",
-		"mailparser": "0.3.6"
+		"amdefine": "~0.0.8",
+		"nodemailer": "https://github.com/whiteout-io/nodemailer/tarball/amd",
+		"node-shims": "https://github.com/whiteout-io/node-shims/tarball/master",
+		"mailparser": "https://github.com/whiteout-io/mailcomposer/tarball/amd"
 	},
 	"devDependencies": {
+		"simplesmtp": "0.3.7",
 		"mocha": "~1.12.0",
 		"chai": "~1.7.2",
+		"sinon": "1.7.3",
 		"grunt": "~0.4.1",
 		"grunt-contrib-jshint": "~0.5.3",
 		"grunt-mocha-test": "~0.6.2",
-		"rewire": "~1.1.3",
-		"jsmockito": "~1.0.4",
-		"jshamcrest": "~0.6.7"
+		"grunt-contrib-watch": "*",
+		"grunt-contrib-copy": "*",
+		"grunt-contrib-clean": "*",
+		"requirejs": "*"
 	}
 }
