@@ -5,7 +5,7 @@ if (typeof define !== 'function') {
 define(function(require) {
     'use strict';
 
-    var SmtpClient = require('smtp-client').SmtpClient,
+    var SmtpClient = require('smtp-client'),
         expect = require('chai').expect,
         dummyMail = {
             from: [{
