@@ -7,26 +7,29 @@ define(function(require) {
 
     var SmtpClient = require('smtp-client'),
         expect = require('chai').expect,
-        dummyMail = {
-            from: [{
-                name: 'Whiteout Test',
-                address: 'whiteout.test@t-online.de'
-            }], // sender address
-            to: [{
-                address: 'safewithme.testuser@gmail.com'
-            }], // list of receivers
-            subject: "Hello", // Subject line
-            body: "Hello world", // plaintext body
-            attachments: [{
-                fileName: 'foo.txt',
-                contentType: 'text/plain',
-                uint8Array: str2arr('foofoofoofoofoo')
-            }, {
-                fileName: 'bar.txt',
-                contentType: 'text/plain',
-                uint8Array: str2arr('barbarbarbarbar')
-            }]
-        };
+        dummyMail, attachments;
+
+    attachments = [{
+        fileName: 'foo.txt',
+        contentType: 'text/plain',
+        uint8Array: str2arr('foofoofoofoofoo')
+    }, {
+        fileName: 'bar.txt',
+        contentType: 'text/plain',
+        uint8Array: str2arr('barbarbarbarbar')
+    }],
+    dummyMail = {
+        from: [{
+            name: 'Whiteout Test',
+            address: 'whiteout.test@t-online.de'
+        }], // sender address
+        to: [{
+            address: 'safewithme.testuser@gmail.com'
+        }], // list of receivers
+        subject: "Hello", // Subject line
+        body: "Hello world", // plaintext body
+        /*attachments: attachments*/
+    };
 
     describe('SmtpClient integration tests', function() {
         this.timeout(20000);

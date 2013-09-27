@@ -4,7 +4,7 @@ var SmtpClient, loginOptions, dummyMail, expect,
     port = 8686;
 
 if (typeof window === 'undefined') {
-    SmtpClient = require('../index').SmtpClient;
+    SmtpClient = require('../index');
     expect = require('chai').expect;
 } else {
     SmtpClient = window.SmtpClient;
