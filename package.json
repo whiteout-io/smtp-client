@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"main": "src/smtp-client.js",
 	"scripts": {
-		"test": "grunt unit"
+		"test": "grunt"
 	},
 	"dependencies": {
 		"amdefine": "~0.0.8",
