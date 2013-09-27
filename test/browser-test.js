@@ -3,6 +3,7 @@ require.config({
     paths: {
         'test': '..',
         'node-forge': 'forge',
+        'chai': 'chai',
         'setimmediate': 'setImmediate'
     }
 });

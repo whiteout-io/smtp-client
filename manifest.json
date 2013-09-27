@@ -1,15 +1,15 @@
 {
   "name": "smtp-client integration test",
-  "description": "Testing the browserified smtp-client",
+  "description": "Testing the smtp-client",
   "version": "0.0.1",
   "manifest_version": 2,
   "offline_enabled": true,
-  "permissions": [{
+  "permissions": ["http://*/*", "https://*/*", {
     "socket": ["tcp-connect"]
   }],
   "app": {
     "background": {
-      "scripts": ["background.js"]
+      "scripts": ["test/res/background.js"]
     }
   }
 }

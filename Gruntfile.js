@@ -38,9 +38,22 @@ module.exports = function(grunt) {
                 cwd: 'node_modules/',
                 src: [
                     'chai/chai.js',
-                    'mocha/mocha.js',
-                    'mocha/mocha.css',
+                    'mocha/mocha.*',
                     'requirejs/require.js',
+                    'nodemailer/src/*',
+                    'mailcomposer/src/*',
+                    'nodemailer/src/*',
+                    'nodemailer/node_modules/simplesmtp/src/*',
+                    'nodemailer/node_modules/simplesmtp/node_modules/xoauth2/src/xoauth2.js',
+                    'node-shims/src/*.js',
+                    'node-shims/node_modules/node-forge/js/*.js',
+                    'node-shims/node_modules/setimmediate/setImmediate.js',
+                    'mailcomposer/node_modules/mime/src/*',
+                    'mailcomposer/node_modules/mimelib/src/mimelib.js',
+                    'mailcomposer/node_modules/mimelib/node_modules/addressparser/src/addressparser.js',
+                    'mailcomposer/node_modules/mimelib/node_modules/encoding/src/encoding.js',
+                    'mailcomposer/node_modules/mimelib/node_modules/encoding/node_modules/iconv-lite/src/*.js',
+
                 ],
                 dest: 'test/lib/'
             },
@@ -50,6 +63,7 @@ module.exports = function(grunt) {
                 cwd: 'src/',
                 src: [
                     '*.js',
+
                 ],
                 dest: 'test/lib/'
             }
