@@ -6,8 +6,7 @@ define(function(require) {
     'use strict';
 
     var nodemailer = require('nodemailer'),
-        Buffer = require('node-shims').Buffer.Buffer,
-        o = {};
+        Buffer = require('node-shims').Buffer.Buffer;
 
     /**
      * SMTP client constructor for the high level smpt api. Creates an SMTP transport object internally
@@ -17,7 +16,7 @@ define(function(require) {
      * @param {String} options.auth.user Username for login
      * @param {String} options.auth.pass Password for login
      */
-    var SmtpClient = o.SmtpClient = function(options, mailer) {
+    var SmtpClient = function(options, mailer) {
         var self = this;
 
         //validate options
@@ -87,5 +86,5 @@ define(function(require) {
         self._smtpTransport.close(); // shut down the connection pool, no more messages
     };
 
-    return o;
+    return SmtpClient;
 });

@@ -8,7 +8,7 @@ define(function(require) {
     var expect = require('chai').expect,
         sinon = require('sinon'),
         nodemailer = require('nodemailer'),
-        SmtpClient = require('..').SmtpClient,
+        SmtpClient = require('..'),
         Dummy;
 
     // the internal call structure of nodemailer is pretty fubar,
