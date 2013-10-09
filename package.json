@@ -8,7 +8,8 @@
 	"dependencies": {
 		"amdefine": "~0.0.8",
 		"nodemailer": "https://github.com/whiteout-io/nodemailer/tarball/amd",
-		"node-shims": "https://github.com/whiteout-io/node-shims/tarball/master"
+		"node-shims": "https://github.com/whiteout-io/node-shims/tarball/master",
+		"mailcomposer": "https://github.com/whiteout-io/mailcomposer/tarball/amd"
 	},
 	"devDependencies": {
 		"mailparser": "https://github.com/whiteout-io/mailparser/tarball/amd",
