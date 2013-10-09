@@ -8,10 +8,11 @@
 	"dependencies": {
 		"amdefine": "~0.0.8",
 		"nodemailer": "https://github.com/whiteout-io/nodemailer/tarball/amd",
-		"node-shims": "https://github.com/whiteout-io/node-shims/tarball/master",
-		"mailparser": "https://github.com/whiteout-io/mailcomposer/tarball/amd"
+		"node-shims": "https://github.com/whiteout-io/node-shims/tarball/master"
 	},
 	"devDependencies": {
+		"mailparser": "https://github.com/whiteout-io/mailparser/tarball/amd",
+		"simplesmtp": "https://github.com/whiteout-io/simplesmtp/tarball/amd",
 		"mocha": "~1.12.0",
 		"chai": "~1.7.2",
 		"sinon": "1.7.3",

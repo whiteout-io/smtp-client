@@ -1,24 +1,12 @@
 'use strict';
 
-var SmtpClient, loginOptions, dummyMail, expect,
-    port = 8686;
+var SmtpClient = require('..'),
+    chai = require('chai'),
+    expect = chai.expect,
+    port = 8686,
+    dummyMail;
 
-if (typeof window === 'undefined') {
-    SmtpClient = require('../index');
-    expect = require('chai').expect;
-} else {
-    SmtpClient = window.SmtpClient;
-    expect = window.chai.expect;
-}
-
-function str2arr(str) {
-    var buf = new ArrayBuffer(str.length);
-    var bufView = new Uint8Array(buf);
-    for (var i = 0, strLen = str.length; i < strLen; i++) {
-        bufView[i] = str.charCodeAt(i);
-    }
-    return bufView;
-}
+chai.Assertion.includeStack = true;
 
 dummyMail = {
     from: [{
@@ -53,7 +41,7 @@ describe('SmtpClient local integration tests', function() {
             // start local test smtp server
             createSTMPServer();
 
-            loginOptions = {
+            var loginOptions = {
                 secure: false, // use SSL
                 port: port,
                 host: 'localhost'
@@ -104,4 +92,17 @@ function createSTMPServer() {
     });
 
     smtp.listen(port);
+}
+
+//
+// Helper method
+// 
+
+function str2arr(str) {
+    var buf = new ArrayBuffer(str.length);
+    var bufView = new Uint8Array(buf);
+    for (var i = 0, strLen = str.length; i < strLen; i++) {
+        bufView[i] = str.charCodeAt(i);
+    }
+    return bufView;
 }

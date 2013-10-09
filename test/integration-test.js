@@ -28,7 +28,7 @@ define(function(require) {
         }], // list of receivers
         subject: "Hello", // Subject line
         body: "Hello world", // plaintext body
-        /*attachments: attachments*/
+        attachments: attachments
     };
 
     describe('SmtpClient integration tests', function() {
@@ -40,7 +40,7 @@ define(function(require) {
             sc.close();
         });
 
-        describe('SmtpClient.send with T-mobile without TLS', function() {
+        describe('SmtpClient.send with T-online without TLS', function() {
             it('should send an email', function(done) {
                 var loginOptions = {
                     secure: false, // use SSL
@@ -62,7 +62,7 @@ define(function(require) {
             });
         });
 
-        // describe('SmtpClient.send with T-mobile over TLS', function() {
+        // describe('SmtpClient.send with T-online over TLS', function() {
         //     it('should send an email', function(done) {
         //         var loginOptions = {
         //             secure: true, // use SSL
