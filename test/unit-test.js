@@ -17,10 +17,10 @@ define(function(require) {
     Dummy.prototype.sendMail = function() {};
 
     describe('SmptClient unit tests', function() {
-        var client, transportMock;
+        var client, secureClient, transportMock;
 
         beforeEach(function() {
-            var createTransportStub;
+            var createTransportStub, mockCert = 'asd';
 
             transportMock = sinon.createStubInstance(Dummy);
             createTransportStub = sinon.stub(nodemailer, 'createTransport', function() {
@@ -37,9 +37,28 @@ define(function(require) {
                 }
             }, nodemailer);
 
+            secureClient = new SmtpClient({
+                secure: true, // use SSL
+                port: 25,
+                host: 'smtpmail.t-online.de',
+                auth: {
+                    user: "whiteout.test@t-online.de",
+                    pass: "@6IyFg1SIlWH91Co"
+                },
+                ca: [mockCert]
+            }, nodemailer);
+
+
+
             expect(client).to.exist;
             expect(client._smtpTransport).to.equal(transportMock);
-            expect(createTransportStub.calledOnce).to.be.true;
+            expect(createTransportStub.calledTwice).to.be.true;
+            expect(createTransportStub.getCall(0).calledWith('SMTP', sinon.match(function(o){
+                return o.secureConnection === false;
+            }))).to.be.true;
+            expect(createTransportStub.getCall(1).calledWith('SMTP', sinon.match(function(o){
+                return o.secureConnection === true && o.tls.ca[0] === mockCert;
+            }))).to.be.true;
         });
 
         afterEach(function() {

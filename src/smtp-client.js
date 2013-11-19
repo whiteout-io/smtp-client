@@ -17,19 +17,26 @@ define(function(require) {
      * @param {String} options.auth.pass Password for login
      */
     var SmtpClient = function(options, mailer) {
-        var self = this;
+        var self = this, opts;
 
         //validate options
         if (typeof options.secure === 'undefined' || !options.port || !options.host) {
             throw new Error('Not all options have been specified!');
         }
 
-        self._smtpTransport = (mailer || nodemailer).createTransport('SMTP', {
+        opts = {
             secureConnection: options.secure, // use SSL
             port: options.port,
             host: options.host,
-            auth: options.auth
-        });
+            auth: options.auth,
+        };
+        if (opts.secureConnection) {
+            opts.tls = {
+                ca: options.ca
+            };
+        }
+
+        self._smtpTransport = (mailer || nodemailer).createTransport('SMTP', opts);
     };
 
     /**
