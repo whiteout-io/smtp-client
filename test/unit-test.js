@@ -53,10 +53,10 @@ define(function(require) {
             expect(client).to.exist;
             expect(client._smtpTransport).to.equal(transportMock);
             expect(createTransportStub.calledTwice).to.be.true;
-            expect(createTransportStub.getCall(0).calledWith('SMTP', sinon.match(function(o){
+            expect(createTransportStub.getCall(0).calledWith('SMTP', sinon.match(function(o) {
                 return o.secureConnection === false;
             }))).to.be.true;
-            expect(createTransportStub.getCall(1).calledWith('SMTP', sinon.match(function(o){
+            expect(createTransportStub.getCall(1).calledWith('SMTP', sinon.match(function(o) {
                 return o.secureConnection === true && o.tls.ca[0] === mockCert;
             }))).to.be.true;
         });
@@ -73,7 +73,13 @@ define(function(require) {
                 }], // sender address
                 to: [{
                     address: 'safewithme.testuser@gmail.com'
-                }], // list of receivers
+                }], // list of to
+                cc: [{
+                    address: 'safewithme.testuser@gmail.com'
+                }], // list of cc
+                bcc: [{
+                    address: 'safewithme.testuser@gmail.com'
+                }], // list of bcc
                 subject: "Hello", // Subject line
                 body: "Hello world", // plaintext body
                 attachments: [{
@@ -90,7 +96,7 @@ define(function(require) {
             var mailMatcher = sinon.match(function(mail) {
                 expect(mail).to.exist;
                 expect(mail.from).to.not.be.instanceof(Array);
-                expect(mail.to).to.not.be.instanceof(Array);
+                expect(mail.to).to.be.instanceof(Array);
                 expect(mail.subject).to.equal('Hello');
                 expect(arr2str(mail.attachments[0].contents)).to.equal('foofoofoofoofoo');
                 expect(arr2str(mail.attachments[1].contents)).to.equal('barbarbarbarbar');

@@ -17,7 +17,8 @@ define(function(require) {
      * @param {String} options.auth.pass Password for login
      */
     var SmtpClient = function(options, mailer) {
-        var self = this, opts;
+        var self = this,
+            opts;
 
         //validate options
         if (typeof options.secure === 'undefined' || !options.port || !options.host) {
@@ -54,18 +55,24 @@ define(function(require) {
 
         mailOptions = {
             from: email.from[0].name + ' <' + email.from[0].address + '>', // sender address
-            to: '', // list of receivers
+            to: (email.to) ? [] : undefined,
+            cc: (email.cc) ? [] : undefined,
+            bcc: (email.bcc) ? [] : undefined,
             subject: email.subject, // Subject line
             text: email.body // plaintext body
         };
 
-        // add recipient to 'to' and seperate addresses with commas
-        email.to.forEach(function(recipient) {
-            if (mailOptions.to.length === 0) {
-                mailOptions.to += recipient.address;
-            } else {
-                mailOptions.to += ', ' + recipient.address;
-            }
+        // add recipient to 'to'
+        Array.isArray(email.to) && email.to.forEach(function(recipient) {
+            mailOptions.to.push(recipient.address);
+        });
+        // add recipient to 'cc'
+        Array.isArray(email.cc) && email.cc.forEach(function(recipient) {
+            mailOptions.cc.push(recipient.address);
+        });
+        // add recipient to 'bcc'
+        Array.isArray(email.bcc) && email.bcc.forEach(function(recipient) {
+            mailOptions.bcc.push(recipient.address);
         });
 
         // convert the Uint8Array to a Buffer
