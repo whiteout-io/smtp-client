@@ -1,4 +1,4 @@
-smtp-client
+smtp-client [![Build Status](https://travis-ci.org/whiteout-io/smtp-client.png)](https://travis-ci.org/whiteout-io/smtp-client)
 ===========
 
 A SMTP client module written in node, running in the browser. Exposes a high-level API wrapping an SMTP client.
